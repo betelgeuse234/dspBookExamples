@@ -1,1 +1,9 @@
-﻿
+﻿  DSPExamples.cpp
+  SignalGenerator.cpp
+  Statistics.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(96,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(105,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(118,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(129,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  DSPExamples.vcxproj -> C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\x64\Debug\DSPExamples.exe

@@ -60,6 +60,16 @@ std::vector<double> SignalGenerator::Sine(double frequency, double amplitude, do
 std::vector<double> SignalGenerator::RandomNoise(double maxAmplitude, double offset)
 {
     std::vector<double> data;
+    double sampleRate = 1000000; // We are going to assume a sample rate of 1MHz
+    double sampleLen = 1;           //1s of samples
+    double numSamples = sampleRate * sampleLen;
+    for (int i = 0; i < numSamples; i++)
+    {
+        double randData = static_cast<double>(rand() + rand() + rand() + rand() + rand() + rand() + rand() + rand()) / static_cast<double>(RAND_MAX * 8); // trying to get a normal distribution
+        randData *= maxAmplitude;       // scale
+        randData -= (maxAmplitude / 2); // center on 0
+        data[i] = randData;
+    }
     return data;
 }
 
