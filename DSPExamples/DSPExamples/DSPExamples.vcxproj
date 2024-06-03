@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Convolution.cpp" />
     <ClCompile Include="DSPExamples.cpp" />
     <ClCompile Include="SignalGenerator.cpp" />
     <ClCompile Include="Statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Convolution.h" />
     <ClInclude Include="SignalGenerator.h" />
     <ClInclude Include="Statistics.h" />
   </ItemGroup>

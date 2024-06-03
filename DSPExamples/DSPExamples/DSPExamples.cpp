@@ -7,6 +7,7 @@
 #include <cmath>
 #include "Statistics.h"
 #include "SignalGenerator.h"
+#include "Convolution.h"
 
 int main()
 {
@@ -22,6 +23,14 @@ int main()
     std::ofstream output_file("./example.txt");
     std::ostream_iterator<double> output_iterator(output_file, "\n");
     std::copy(sineWave.begin(), sineWave.end(), output_iterator);
+
+    std::vector<double> x = { 0, -1, -1.25, 2, 1.5, 1.5, .75, 0, -.75 };
+    std::vector<double> h = { 1, -0.5, -.25, -.1 };
+    std::vector<double> y(x.size() + h.size() - 1, 0);
+    std::vector<double> y2(x.size() + h.size() - 1, 0);
+
+    Convolution::InputSideAlgorithm(&x[0], &h[0], &y[0], x.size(), h.size());
+    Convolution::OutputSideAlgorithm(&x[0], &h[0], &y2[0], x.size(), h.size()); 
 
     std::cout << "Sine Wave\n" << "Mean = " << meanSine << "\n" << "Standard Deviation = " << stdDevSine << "\n";
 }
