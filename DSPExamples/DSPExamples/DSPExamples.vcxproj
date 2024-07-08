@@ -131,11 +131,13 @@
     <ClCompile Include="DSPExamples.cpp" />
     <ClCompile Include="SignalGenerator.cpp" />
     <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="Transforms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Convolution.h" />
     <ClInclude Include="SignalGenerator.h" />
     <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Transforms.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
