@@ -6,11 +6,11 @@ class Transforms
 	static void DFTCorrelationInput(double* xx, double* rex, double* imx, int n);
 	static void DFTCorrelationOutput(double* xx, double* rex, double* imx, int n);
 
-	static void RectToPolar(double* rex, double* imx, double* magx, double* phasex, int n);
-	static void PolarToRect(double* rex, double* imx, double* magx, double* phasex, int n);
+	static void CplxDFTByCorr(double* xR, double* xI, double* reX, double* imX, int n);
 
-	static void PhaseUnwrap(double* phasex, double* phasexUnwrap, int n);
-
-
+	static void FFT(double* reX, double imX, int n);
+	static void InverseFFT(double* reX, double imX, int n);
+	static void RealInverseFFT(double* reX, double imX, int n);
+	static void RealFFT(double* reX, double imX, int n);
 };
 

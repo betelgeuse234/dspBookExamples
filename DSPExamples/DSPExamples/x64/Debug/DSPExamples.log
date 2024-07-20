@@ -2,11 +2,14 @@
   DSPExamples.cpp
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(32,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(33,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  HelperFuncs.cpp
+C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\HelperFuncs.cpp(64,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SignalGenerator.cpp
   Statistics.cpp
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(96,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(105,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(118,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(129,20): warning C4018: '<': signed/unsigned mismatch
+  Transforms.cpp
   Generating Code...
   DSPExamples.vcxproj -> C:\Users\snyde\Documents\Projects\dspBookExamples\DSPExamples\x64\Debug\DSPExamples.exe
