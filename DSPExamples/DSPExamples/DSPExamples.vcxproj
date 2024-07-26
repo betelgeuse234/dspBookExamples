@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Convolution.cpp" />
     <ClCompile Include="DSPExamples.cpp" />
+    <ClCompile Include="Filters.cpp" />
     <ClCompile Include="HelperFuncs.cpp" />
     <ClCompile Include="SignalGenerator.cpp" />
     <ClCompile Include="Statistics.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Convolution.h" />
+    <ClInclude Include="Filters.h" />
     <ClInclude Include="HelperFuncs.h" />
     <ClInclude Include="SignalGenerator.h" />
     <ClInclude Include="Statistics.h" />
