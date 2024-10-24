@@ -87,18 +87,19 @@ std::vector<double> SignalGenerator::RandomNoise(double maxAmplitude, double off
     double numSamples = sampleRate * sampleLen;
     for (int i = 0; i < numSamples; i++)
     {
-        double randData =   static_cast<double>(rand()) + 
+        double maxVal = static_cast<double>(RAND_MAX) * 8.0;
+        double randData =   (static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
                             static_cast<double>(rand()) + 
-                            static_cast<double>(rand()) / 
-                            (static_cast<double>(RAND_MAX) * 8); // trying to get a normal distribution for the noise
+                            static_cast<double>(rand())) / 
+                            maxVal; // trying to get a normal distribution for the noise
         randData *= maxAmplitude;       // scale
         randData -= (maxAmplitude / 2); // center on 0
-        data[i] = randData;
+        data.push_back(randData);
     }
     return data;
 }
