@@ -5,7 +5,7 @@
 // needs to be tested
 //L oop through each requency generating the entire length of the sine 
 // and cosine waves, and add them to the accumulator signa
-void InverseDFTOne(double* xx, double* rex, double* imx, int n)
+void Transforms::InverseDFTOne(double* xx, double* rex, double* imx, int n)
 {
 	double pi = 3.14159265; // replace in the future
 	// divide frequency domain by n/2 and invert the sign of the imaginary value
@@ -38,7 +38,7 @@ void InverseDFTOne(double* xx, double* rex, double* imx, int n)
 // needs to be tested
 // Loop through each sample in the time domain, 
 // and sum the corresponding samples from each cosine and sine wave
-void InverseDFTTwo(double* xx, double* rex, double* imx, int n)
+void Transforms::InverseDFTTwo(double* xx, double* rex, double* imx, int n)
 {
 	double pi = 3.14159265; // replace in the future
 // divide frequency domain by n/2 and invert the sign of the imaginary value
@@ -69,7 +69,7 @@ void InverseDFTTwo(double* xx, double* rex, double* imx, int n)
 }
 
 // needs to be tested
-void DFTCorrelationInput(double* xx, double* rex, double* imx, int n)
+void Transforms::DFTCorrelationInput(double* xx, double* rex, double* imx, int n)
 {
 	double pi = 3.14159265; // replace in the future
 
@@ -91,7 +91,7 @@ void DFTCorrelationInput(double* xx, double* rex, double* imx, int n)
 }
 
 // needs to be tested
-void DFTCorrelationOut(double* xx, double* rex, double* imx, int n)
+void Transforms::DFTCorrelationOutput(double* xx, double* rex, double* imx, int n)
 {
 	double pi = 3.14159265; // replace in the future
 
@@ -119,7 +119,7 @@ void DFTCorrelationOut(double* xx, double* rex, double* imx, int n)
 // XR[ ] and XI[ ] contain the real and imaginary parts of the time domain.
 // Upon return, REX[ ] and IMX[ ] contain the frequency domain data.
 // All signals run from 0 to N%-1.
-void CplxDFTByCorr(double* xR, double* xI, double* reX, double* imX, int n)
+void Transforms::CplxDFTByCorr(double* xR, double* xI, double* reX, double* imX, int n)
 {
 	double pi = 3.14159265; // should be using value for pi from library or some common area
 	// Zero rex and imx so they can be used as accumulators during correlation
@@ -150,7 +150,7 @@ void CplxDFTByCorr(double* xR, double* xI, double* reX, double* imX, int n)
 // Upon entry, N% contains the number of points in the DFT, REX[ ] and
 // IMX[ ] contain the real and imaginary parts of the input. Upon return,
 // REX[ ] and IMX[ ] contain the DFT output. All signals run from 0 to N%-1.
-void FFT(double* reX, double* imX, int n)
+void Transforms::FFT(double* reX, double* imX, int n)
 {
 	double pi = 3.14159265;
 	int nm1 = n - 1;
@@ -227,7 +227,7 @@ void FFT(double* reX, double* imX, int n)
 // IMX[ ] contain the real and imaginary parts of the complex frequency domain.
 // Upon return, REX[ ] and IMX[ ] contain the complex time domain.
 // All signals run from 0 to N%-1
-void InverseFFT(double* reX, double* imX, int n)
+void Transforms::InverseFFT(double* reX, double* imX, int n)
 {
 	// Change sign of 
 	for (int k = 0; k < n - 1; k++)
@@ -251,7 +251,7 @@ void InverseFFT(double* reX, double* imX, int n)
 // IMX[ ] contain the real and imaginary parts of the frequency domain running from
 // index 0 to N%/2. The remaining samples in REX[ ] and IMX[ ] are ignored.
 // Upon return, REX[ ] contains the real time domain, IMX[ ] contains zeros.
-void RealInverseFFT(double* reX, double* imX, int n)
+void Transforms::RealInverseFFT(double* reX, double* imX, int n)
 {
 	// Make frequency domain symmetrical
 	for (int k = (n / 2) + 1; k < n - 1; k++)
@@ -285,7 +285,7 @@ void RealInverseFFT(double* reX, double* imX, int n)
 // Upon entry, N% contains the number of points in the DFT, REX[ ] contains
 // the real input signal, while values in IMX[ ] are ignored. Upon return,
 // REX[ ] and IMX[ ] contain the DFT output. All signals run from 0 to N%
-void RealFFT(double* reX, double* imX, int n)
+void Transforms::RealFFT(double* reX, double* imX, int n)
 {
 	int nh = n / 2 - 1;
 	// Separate evenand odd points

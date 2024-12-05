@@ -4,6 +4,7 @@ C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExample
 C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(67,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(90,87): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Filters.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Filters.cpp(74,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   HelperFuncs.cpp
 C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\HelperFuncs.cpp(64,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SignalGenerator.cpp
