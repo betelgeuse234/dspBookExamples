@@ -11,6 +11,7 @@
 #include "Convolution.h"
 #include "Filters.h"
 #include "ipp.h"
+#include "IQSource.h"
 
 void ippsFFT(Ipp64f* src, Ipp64f* dst, int fftSize)
 {
@@ -44,7 +45,7 @@ void ippsFFT(Ipp64f* src, Ipp64f* dst, int fftSize)
 
 int main()
 {
-    
+    IQSource datasource;
     std::vector<double> squareWave = SignalGenerator::SquareWave(1000, .5, 20.0, 0);
     double mean = Statistics::mean(&squareWave[0], static_cast<unsigned int>(squareWave.size()));
     double std_dv = Statistics::std_dev(&squareWave[0], static_cast<unsigned int>(squareWave.size()));

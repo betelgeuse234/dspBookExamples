@@ -132,6 +132,7 @@
     <ClCompile Include="DSPExamples.cpp" />
     <ClCompile Include="Filters.cpp" />
     <ClCompile Include="HelperFuncs.cpp" />
+    <ClCompile Include="IQSource.cpp" />
     <ClCompile Include="SignalGenerator.cpp" />
     <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="Transforms.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Convolution.h" />
     <ClInclude Include="Filters.h" />
     <ClInclude Include="HelperFuncs.h" />
+    <ClInclude Include="IQSource.h" />
     <ClInclude Include="SignalGenerator.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Transforms.h" />
