@@ -25,3 +25,8 @@ IQSource::IQSource()
 	data = (Complex*)buffer.data();
 	dataLen = buffer.size() / 4;
 }
+
+void IQSource::GetIQData(Complex* dest, int len)
+{
+	std::memcpy(dest, data, sizeof(len));
+}

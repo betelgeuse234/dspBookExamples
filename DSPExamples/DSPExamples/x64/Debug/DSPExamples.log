@@ -1,9 +1,27 @@
-﻿  DSPExamples.cpp
-C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(67,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(68,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(91,87): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  Convolution.cpp
+  DSPExamples.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(70,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(71,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\DSPExamples.cpp(94,87): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Filters.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Filters.cpp(74,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  HelperFuncs.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\HelperFuncs.cpp(64,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   IQSource.cpp
   The contents of <filesystem> are available only with C++17 or later.
 C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\IQSource.cpp(26,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  SignalGenerator.cpp
+  Statistics.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(96,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(105,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(118,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Statistics.cpp(129,20): warning C4018: '<': signed/unsigned mismatch
+  Transforms.cpp
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(158,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(193,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(219,17): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(220,17): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(343,37): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\DSPExamples\Transforms.cpp(345,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Generating Code...
   DSPExamples.vcxproj -> C:\Users\Nathan Snyder\Documents\Projects\dspBookExamples\DSPExamples\x64\Debug\DSPExamples.exe

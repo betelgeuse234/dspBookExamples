@@ -11,6 +11,7 @@ class IQSource
 {
 public:
 	IQSource();
+	void GetIQData(Complex* dest, int len);
 private:
 	Complex* data;
 	int dataLen;
