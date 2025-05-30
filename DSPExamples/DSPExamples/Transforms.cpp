@@ -155,7 +155,7 @@ void Transforms::FFT(double* reX, double* imX, int n)
 	double pi = 3.14159265;
 	int nm1 = n - 1;
 	int nd2 = n / 2; // this probably needs to be a double due to integer devision
-	int m = log(n) / log(2);
+	int m = static_cast<int>(log(n) / log(2));
 	int j = nd2;
 
 
@@ -178,10 +178,12 @@ void Transforms::FFT(double* reX, double* imX, int n)
 
 		int k = nd2;
 
-		while (k < j)
-		{
-			j = j - k;
-			k = k / 2;
+		if (k < j) {
+			while (k < j)
+			{
+				j = j - k;
+				k = k / 2;
+			}
 		}
 
 		j = j + k;
@@ -190,7 +192,7 @@ void Transforms::FFT(double* reX, double* imX, int n)
 	// Loop for each stage
 	for (int l = 1; l < m; l++)
 	{
-		int le = pow(2, l);
+		int le = static_cast<int>(pow(2, l));
 		int le2 = le / 2;
 		int ur = 1;
 		int ui = 0;

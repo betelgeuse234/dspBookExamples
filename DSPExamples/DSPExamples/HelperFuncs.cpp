@@ -61,7 +61,7 @@ void PhaseUnwrap(double* phasex, double* phasexUnwrap, int n)
 	double pi = 3.14159265; // replace in the future
 	for (int k = 0; k < n; k++)
 	{
-		int c = static_cast<int>(phasexUnwrap[k - 1] - phasex[k]) / 2 * pi;
-		phasexUnwrap[k] = phasex[k] + static_cast<double>(c) * 2.0 * pi;
+		int c = static_cast<int>(phasexUnwrap[k - 1] - phasex[k] / 2 * pi);
+		phasexUnwrap[k] = phasex[k] + static_cast<double>(c * 2.0 * pi);
 	}
 }

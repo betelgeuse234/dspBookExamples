@@ -93,7 +93,7 @@ double Statistics::running_std_dev(double* data, unsigned int length)
 
 void Statistics::histogram(unsigned int* data, unsigned int dataLength, unsigned int* histData)
 {
-	for (int i = 0; i < dataLength; i++)
+	for (unsigned int i = 0; i < dataLength; i++)
 	{
 		histData[data[i]] += 1;
 	}
@@ -102,9 +102,9 @@ void Statistics::histogram(unsigned int* data, unsigned int dataLength, unsigned
 double Statistics::histMean(unsigned int* histData, unsigned int histLength)
 {
 	double mean = 0;
-	for (int i = 0; i < histLength; i++)
+	for (unsigned int i = 0; i < histLength; i++)
 	{
-		mean += i * histData[i];
+		mean += static_cast<double>(i * histData[i]);
 	}
 	
 	mean = mean / histLength;
@@ -115,7 +115,7 @@ double Statistics::histStdDev(unsigned int* histData, unsigned int histLength, d
 {
 	double variance = 0;
 	double stdDev = 0;
-	for (int i = 0; i < histLength; i++)
+	for (unsigned int i = 0; i < histLength; i++)
 	{
 		variance += histData[i] * pow(2,(i - mean));
 	}
@@ -126,7 +126,7 @@ double Statistics::histStdDev(unsigned int* histData, unsigned int histLength, d
 
 void Statistics::binnedHistogram(double* data, unsigned int dataLength, unsigned int* histData, unsigned int numBins)
 {
-	for (int i = 0; i < dataLength; i++)
+	for (unsigned int i = 0; i < dataLength; i++)
 	{
 		unsigned int binNum = static_cast<unsigned int>(data[i] * numBins); // I believe this needs to be changed. I don't think it will give us the bins we want. We probably want some scale information
 		histData[binNum] += 1;

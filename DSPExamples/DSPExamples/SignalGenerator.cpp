@@ -4,8 +4,6 @@
 
 std::vector<double> SignalGenerator::SquareWave(double frequency, double dutyCycle, double amplitude, double offset)
 {   
-    
-    double sampleRate = 1000000;    // We are going to assume a sample rate of 1MHz
     double sampleLen = 1;           //1s of samples
     double numSamples = sampleRate * sampleLen;
     double period = 1 / frequency;
@@ -36,7 +34,6 @@ std::vector<double> SignalGenerator::SquareWave(double frequency, double dutyCyc
 // this hasn't been tested yet
 std::vector<double> SignalGenerator::TriangeWave(double frequency, double amplitude, double offset)
 {
-    double sampleRate = 1000000; // We are going to assume a sample rate of 1MHz
     double period = 1 / frequency;
     double sampleLen = 1;           //1s of samples
     double numSamples = sampleRate * sampleLen;
@@ -60,12 +57,11 @@ std::vector<double> SignalGenerator::TriangeWave(double frequency, double amplit
 }
 
 // look into one of the more efficeint sine implementations
-std::vector<double> SignalGenerator::Sine(double frequency, double amplitude, double offset)
+std::vector<double> SignalGenerator::Sine(double frequency, double amplitude, double offset, double time)
 {
-    double sampleRate = 1000000; // We are going to assume a sample rate of 1MHz
     double period = 1 / frequency;
     double sampleLen = 1;           //1s of samples
-    double numSamples = sampleRate * sampleLen;
+    double numSamples = sampleRate * time;
     double samplesPerPeriod = sampleRate * period;
     double angle = 0.0; 
     std::vector<double> data;
@@ -82,7 +78,6 @@ std::vector<double> SignalGenerator::Sine(double frequency, double amplitude, do
 std::vector<double> SignalGenerator::RandomNoise(double maxAmplitude, double offset)
 {
     std::vector<double> data;
-    double sampleRate = 1000000; // We are going to assume a sample rate of 1MHz
     double sampleLen = 1;           //1s of samples
     double numSamples = sampleRate * sampleLen;
     for (int i = 0; i < numSamples; i++)
@@ -108,4 +103,66 @@ std::vector<double> SignalGenerator::AM(double carrierFreq, double carrierAmp, d
 {
     std::vector<double> data;
     return data;
+}
+
+std::vector<double> SignalGenerator::Pulse(double frequency, double amplitude, double period, double tOn, double time, double offset)
+{
+    double tOff = period - tOn;
+    std::vector<double> tOnData = Sine(frequency, amplitude, offset, tOn);
+    std::vector<double> tOffData(tOff * sampleRate, 0.0);
+    std::vector<double> signal;
+    int signalIndex = 0;
+
+    signal.resize(time * sampleRate);
+
+    for (double elapsedTime = 0; elapsedTime < time; elapsedTime += period) {
+        if (time - elapsedTime > period) {
+            std::copy(tOffData.begin(), tOffData.end(), signal.begin() + signalIndex);
+            signalIndex += tOff * sampleRate;
+            std::copy(tOnData.begin(), tOnData.end(), signal.begin() + signalIndex);
+            signalIndex += tOn * sampleRate;
+        } 
+        else
+        {
+            if (time - elapsedTime > tOff)
+            {
+                std::copy(tOffData.begin(), tOffData.end(), signal.begin() + signalIndex);
+                signalIndex += tOff * sampleRate;
+                std::copy(tOnData.begin(), tOnData.begin() + (signal.size() - signalIndex), signal.begin() + signalIndex);
+                signalIndex += (signal.size() - signalIndex);
+            } 
+            else
+            {
+                std::copy(tOffData.begin(), tOffData.begin() + (signal.size() - signalIndex), signal.begin() + signalIndex);
+                signalIndex += (signal.size() - signalIndex);
+            }
+        }
+    }
+
+    // Deal with the remaining time
+    /*
+    double temp = std::floor(time / period);
+    temp = time / period - temp;
+    double timeRemaining = period * temp;
+    if (timeRemaining < tOff) {
+        std::copy(tOffData.begin(), tOffData.begin()+ timeRemaining, signal.begin() + signalIndex);
+        signalIndex += timeRemaining;
+    }
+    else {
+        std::copy(tOffData.begin(), tOffData.end(), signal.begin() + signalIndex);
+        signalIndex += tOff * sampleRate;
+        timeRemaining -= tOff;
+        if (timeRemaining < tOn)
+        {
+            std::copy(tOnData.begin(), tOnData.begin() + timeRemaining, signal.begin() + signalIndex);
+            signalIndex += timeRemaining;
+        }
+        else
+        {
+            std::copy(tOnData.begin(), tOnData.end(), signal.begin() + signalIndex);
+            signalIndex += tOn * sampleRate;
+        }
+    }*/
+
+    return signal;
 }

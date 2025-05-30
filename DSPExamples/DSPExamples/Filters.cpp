@@ -71,7 +71,7 @@ void Filters::LowPassWindowedSinc(double* input, double* output, int dataLen, do
 
 	for (int i = 0; i < 100; i++)
 	{
-		sum = sum + kernal[i];
+		sum = sum + static_cast<int>(kernal[i]);
 	}
 
 	for (int i = 0; i < 100; i++)

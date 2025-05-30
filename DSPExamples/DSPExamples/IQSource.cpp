@@ -23,7 +23,7 @@ IQSource::IQSource()
 	std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(IQData), {});
 
 	data = (Complex*)buffer.data();
-	dataLen = buffer.size() / 4;
+	dataLen = static_cast<int>(buffer.size()) / 4;
 }
 
 void IQSource::GetIQData(Complex* dest, int len)

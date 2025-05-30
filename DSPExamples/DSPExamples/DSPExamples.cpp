@@ -5,13 +5,13 @@
 #include <fstream>
 #include <vector>
 #include <cmath>
-#include <ipp.h>
 #include "Statistics.h"
 #include "SignalGenerator.h"
 #include "Convolution.h"
 #include "Filters.h"
 #include "ipp.h"
 #include "IQSource.h"
+#include "Transforms.h"
 
 void ippsFFT(Ipp64f* src, Ipp64f* dst, int fftSize)
 {
@@ -45,17 +45,33 @@ void ippsFFT(Ipp64f* src, Ipp64f* dst, int fftSize)
 
 int main()
 {
-    IQSource datasource;
-    std::vector<Complex> iqData;
-    iqData.resize(4096);
-    datasource.GetIQData(&iqData[0], 4096);
-    std::vector<double> squareWave = SignalGenerator::SquareWave(1000, .5, 20.0, 0);
+    //IQSource datasource;
+    //std::vector<Complex> iqData;
+    //iqData.resize(4096);
+    //datasource.GetIQData(&iqData[0], 4096);
+    
+    uint32_t sampleRate = 1000000; // 1MSPS
+    SignalGenerator sigGen(sampleRate);
+    std::vector<double> squareWave = sigGen.SquareWave(1000, .5, 20.0, 0);
     double mean = Statistics::mean(&squareWave[0], static_cast<unsigned int>(squareWave.size()));
     double std_dv = Statistics::std_dev(&squareWave[0], static_cast<unsigned int>(squareWave.size()));
 
+    double pulseFreq = 50.0e3;
+    double timePerSample = 1.0 / (double)sampleRate;
+    double numSamples = 2048;
+    double time = numSamples * timePerSample;
+    std::vector<double> pulse = sigGen.Pulse(pulseFreq, 1.0, 80.0e-6, 40.0e-6, time, 0);
+
+    std::ofstream pulse_file("./pulse.csv");
+    for (int i = 0; i < pulse.size(); i++)
+    {
+        pulse_file << pulse[i] << "\n";
+    }
+    pulse_file.close();
+
     std::cout << "Square Wave\n" << "Mean = " << mean << "\n" << "Standard Deviation = " << std_dv << "\n";
 
-    std::vector<double> sineWave = SignalGenerator::Sine(1000, 20.0, 0);
+    std::vector<double> sineWave = sigGen.Sine(1000, 20.0, 0, 1);
     double meanSine = Statistics::mean(&sineWave[0], static_cast<unsigned int>(sineWave.size()));
     double stdDevSine = Statistics::std_dev(&sineWave[0], static_cast<unsigned int>(sineWave.size()));
     std::ofstream output_file("./example.txt");
@@ -64,19 +80,19 @@ int main()
 
     std::vector<double> x = { 0, -1, -1.25, 2, 1.5, 1.5, .75, 0, -.75 };
     std::vector<double> h = { 1, -0.5, -.25, -.1 };
-    std::vector<double> y(x.size() + h.size() - 1, 0);
-    std::vector<double> y2(x.size() + h.size() - 1, 0);
+    std::vector<double> y(static_cast<int>(x.size() + h.size() - 1), 0);
+    std::vector<double> y2(static_cast<int>(x.size() + h.size() - 1), 0);
 
-    Convolution::InputSideAlgorithm(&x[0], &h[0], &y[0], x.size(), h.size());
-    Convolution::OutputSideAlgorithm(&x[0], &h[0], &y2[0], x.size(), h.size()); 
+    Convolution::InputSideAlgorithm(&x[0], &h[0], &y[0], static_cast<int>(x.size()), static_cast<int>(h.size()));
+    Convolution::OutputSideAlgorithm(&x[0], &h[0], &y2[0], static_cast<int>(x.size()), static_cast<int>(h.size()));
 
     std::cout << "Sine Wave\n" << "Mean = " << meanSine << "\n" << "Standard Deviation = " << stdDevSine << "\n";
 
 
-    std::vector<double> sine1 = SignalGenerator::Sine(100e3, 20.0, 0);
-    std::vector<double> sine2 = SignalGenerator::Sine(200e3, 20.0, 0);
-    std::vector<double> sine3 = SignalGenerator::Sine(400e3, 20.0, 0);
-    std::vector<double> noise = SignalGenerator::RandomNoise(1.0, 0);
+    std::vector<double> sine1 = sigGen.Sine(100e3, 20.0, 0, 1);
+    std::vector<double> sine2 = sigGen.Sine(200e3, 20.0, 0, 1);
+    std::vector<double> sine3 = sigGen.Sine(400e3, 20.0, 0, 1);
+    std::vector<double> noise = sigGen.RandomNoise(1.0, 0);
 
     std::vector<double> summedWave;
     std::vector<double> outputWave;
@@ -91,7 +107,7 @@ int main()
     outputWave.resize(summedWave.size());
 
     int avgWidth = 41;
-    Filters::MovingAverage(&summedWave[0], &outputWave[0], avgWidth, summedWave.size());
+    Filters::MovingAverage(&summedWave[0], &outputWave[0], avgWidth, static_cast<int>(summedWave.size()));
 
     // Print out filtering results
     std::ofstream filter_file("./filterResults.csv");
@@ -118,6 +134,18 @@ int main()
         fft_file << magnitude[i / 2] << "\n";
     }
     fft_file.close();
+
+    int fftLen = 2048;
+    double* rex = new double[fftLen / 2];
+    double* imx = new double[fftLen / 2];
+    Transforms::RealFFT(pulse.data(), imx, fftLen);
+
+    std::ofstream pulse_fft_file("./pulse_fft.csv");
+    for (int i = 0; i < pulse.size(); i++)
+    {
+        pulse_fft_file << pulse[i] << "\n";
+    }
+    pulse_fft_file.close();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
