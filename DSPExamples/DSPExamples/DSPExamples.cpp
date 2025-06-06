@@ -56,7 +56,7 @@ int main()
     double mean = Statistics::mean(&squareWave[0], static_cast<unsigned int>(squareWave.size()));
     double std_dv = Statistics::std_dev(&squareWave[0], static_cast<unsigned int>(squareWave.size()));
 
-    double pulseFreq = 50.0e3;
+    double pulseFreq = 100.0e3;
     double timePerSample = 1.0 / (double)sampleRate;
     double numSamples = 2048;
     double time = numSamples * timePerSample;
@@ -89,10 +89,10 @@ int main()
     std::cout << "Sine Wave\n" << "Mean = " << meanSine << "\n" << "Standard Deviation = " << stdDevSine << "\n";
 
 
-    std::vector<double> sine1 = sigGen.Sine(100e3, 20.0, 0, 1);
-    std::vector<double> sine2 = sigGen.Sine(200e3, 20.0, 0, 1);
-    std::vector<double> sine3 = sigGen.Sine(400e3, 20.0, 0, 1);
-    std::vector<double> noise = sigGen.RandomNoise(1.0, 0);
+    std::vector<double> sine1 = sigGen.Sine(100e3, 1.0, 0, 1);
+    std::vector<double> sine2 = sigGen.Sine(200e3, 1.0, 0, 1);
+    std::vector<double> sine3 = sigGen.Sine(400e3, 1.0, 0, 1);
+    std::vector<double> noise = sigGen.RandomNoise(0.01, 0);
 
     std::vector<double> summedWave;
     std::vector<double> outputWave;
@@ -123,8 +123,7 @@ int main()
     Ipp64f* ippsSrc = static_cast<Ipp64f*>(&sine1[0]);
     Ipp64f* ippsDst = ippsMalloc_64f(fftSize);    // Allocate complex buffers
     Ipp64f* magnitude = ippsMalloc_64f(fftSize/2);    // Allocate complex buffers
-    ippsFFT(ippsSrc, ippsDst, fftSize);
-    
+    ippsFFT(ippsSrc, ippsDst, fftSize);  
     // print out FFT results
     
     std::ofstream fft_file("./fftResults.csv");
@@ -136,14 +135,16 @@ int main()
     fft_file.close();
 
     int fftLen = 2048;
-    double* rex = new double[fftLen / 2];
-    double* imx = new double[fftLen / 2];
-    Transforms::RealFFT(pulse.data(), imx, fftLen);
+    std::vector<double> rex(fftLen/2, 0.0);
+    std::vector<double> imx(fftLen/2, 0.0);
+    std::vector<double> mag(fftLen / 2, 0.0);
+    Transforms::RealFFT(sine2.data(), imx.data(), fftLen/2);
 
-    std::ofstream pulse_fft_file("./pulse_fft.csv");
-    for (int i = 0; i < pulse.size(); i++)
+    std::ofstream pulse_fft_file("pulse_fft.csv");
+    for (int i = 0; i < fftLen/2; i+=2)
     {
-        pulse_fft_file << pulse[i] << "\n";
+        mag[i] = sqrt(pow(sine2[i], 2) + pow(imx[i], 2));
+        pulse_fft_file << mag[i] << "\n";
     }
     pulse_fft_file.close();
 }

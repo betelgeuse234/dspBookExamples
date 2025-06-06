@@ -162,11 +162,7 @@ void Transforms::FFT(double* reX, double* imX, int n)
 	// Bit reversal sorting
 	for (int i = 1; i < n - 2; i++)
 	{
-		if (i >= j)
-		{
-
-		}
-		else
+		if (i < j)
 		{
 			double tr = reX[j];
 			double ti = imX[j];
@@ -178,12 +174,10 @@ void Transforms::FFT(double* reX, double* imX, int n)
 
 		int k = nd2;
 
-		if (k < j) {
-			while (k < j)
-			{
-				j = j - k;
-				k = k / 2;
-			}
+		while (k <= j)
+		{
+			j = j - k;
+			k = k / 2;
 		}
 
 		j = j + k;
@@ -200,7 +194,7 @@ void Transforms::FFT(double* reX, double* imX, int n)
 		double sr = cos(pi / le2);
 		double si = -sin(pi / le2);
 		// Loop for each sub DFT
-		for (int j = 1; j < le; j++)
+		for (int j = 1; j < le2; j++)
 		{
 			int jm1 = j - 1;
 
